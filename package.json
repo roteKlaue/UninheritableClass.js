@@ -1,0 +1,11 @@
+{
+  "name": "uninheritableclass",
+  "version": "1.0.0",
+  "description": "An example of a class that cannot be modified or inherited from.",
+  "main": "./index.js",
+  "keywords": [
+    "js"
+  ],
+  "author": "roteKlaue",
+  "license": "ISC"
+}
