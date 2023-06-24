@@ -50,6 +50,9 @@ class Uninheritable {
     }
 }
 
+//freezing the prototype of the Uninheritable class
+Object.freeze(Uninheritable.prototype);
+
 class Extender extends Uninheritable {
     
 }
@@ -66,4 +69,8 @@ a.unOverritableFunction = () => {
 
 Uninheritable.prototype.unOverritableFunction = () => {
     console.log("error"); // Throws an error: "This function is not overwritable"
+}
+
+Uninheritable.prototype.newFunction = () => {
+    console.log("error"); // doens't throw an error, but doens't add a new function
 }
