@@ -1,34 +1,27 @@
 # Uninheritable.js
 
-This is a simple proof of concept class that cannot be modified at runtime.
-In JavaScript you can edit any class by simply accessing its prototype.
-This example shows how you can use set/get methods to restrict access to the prototype of your class.
+**Uninheritable** is a simple proof of concept class in JavaScript that demonstrates how you can create a class that cannot be modified at runtime. It uses the concept of setter and getter methods to restrict access to the prototype of the class, providing a level of immutability.
 
-```js
-class Uninheritable {
-    #unaccessableProperty = true;
-    #unaccessableFunction = function() {
-        console.log(this.#unaccessableProperty);
-    }
+## Class Details
+### Constructor
 
-    constructor() {
-        if (new.target !== Uninheritable) {
-            // check if constructor is the same as of the current class
-            // remove the posibility of extending the class
-            throw new Error("This class is not inheritable");
-        }
+The `constructor` function of the `Uninheritable` class is responsible for initializing instances of the class. It ensures that the class cannot be inherited from by checking if the `new.target` is the same as the `Uninheritable` class itself. If it is not, an error is thrown, preventing inheritance. Additionally, the `Object.preventExtensions()` method is called to prevent any extension of the instance, disallowing the addition of new properties.
 
-        Object.preventExtensions(this);
-    }
+### Properties
 
-    get unOverritableFunction() {
-        // returns the function you want to give access to
-        return this.#unaccessableFunction;
-    }
+- `#unaccessableProperty`: A private property that is inaccessible and unmodifiable. It is denoted by the # symbol.
 
-    set unOverritableFunction(val) {
-        // catches all attempts to overwrite the function
-        throw new Error("This function is not overwritable");
-    }
-}
-```
+### Methods
+
+- `#unaccessableFunction`: A private function that is inaccessible and unmodifiable. It logs the value of the `#unaccessableProperty` to the console.
+- `get unOverritableFunction()`: An accessor method that returns the private function `#unaccessableFunction`. This allows controlled access to the function.
+- `set unOverritableFunction(val)`: A setter method that throws an error if an attempt is made to overwrite the function. This enforces the immutability of the function.
+
+## Limitations
+
+- The protection mechanisms provided by the `Uninheritable` class apply to the instantiated object's properties and functions. Properties and functions defined on the prototype chain may still be modifiable.
+- This class serves as a proof of concept and may not cover all possible scenarios or security concerns. It's essential to evaluate your specific use case and requirements to ensure the desired level of immutability and security.
+
+## License
+
+This project is open source and available under the [MIT License](https://opensource.org/licenses/MIT).
